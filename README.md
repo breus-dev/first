@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Yama
 ====
 
@@ -69,3 +70,6 @@ this will run yama in embedded jetty server in production mode (the default prof
 $ java -jar yama-webapi-1.0-SNAPSHOT.war --spring.profiles.active=dev
 ```
 # alaska
+=======
+# first
+>>>>>>> 952ca6b5bd8804a9e12ad06b077a38f0eb94af5e
