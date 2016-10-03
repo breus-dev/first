@@ -1,0 +1,72 @@
+<div class="row">
+	<div class="col-md-3">
+		<h3>
+			{{ 'complaint.category.header' | translate }}
+			<br>
+			<small translate="complaint.category.subheader"></small>
+		</h3>
+		<br>
+
+		<form ng-submit="ctrl.searchParams.page=1;ctrl.search();">
+			<div class="form-group">
+				<button type="button" class="btn btn-primary" ng-click="ctrl.openForm(ctrl.category)">
+					<span class="fa fa-plus"></span> {{ 'complaint.category.label.add' | translate }}
+				</button>
+			</div>
+			<hr>
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="ctrl.searchParams.q" placeholder="{{ 'complaint.category.label.search' | translate }}..." autofocus>
+			</div>
+			<div class="form-group">
+				<button type="submit" value="Search" class="btn btn-default">
+					<span class="fa fa-search"></span> {{ 'complaint.category.label.search' | translate }}
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-md-12">
+				<br>
+				<div class="box">
+					<div class="box-header">
+					</div>
+					<div class="box-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th translate="complaint.category.label.name"></th>
+										<th translate="complaint.category.label.description"></th>
+										<th translate="complaint.category.label.action"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="category in ctrl.categories">
+										<td><a href="" ng-click="ctrl.openForm(category)"><span ng-bind="category.name"></a></span></td>
+										<td ng-bind="category.description"></td>
+										<td>
+											<a href="" class="btn btn-danger btn-xs" ng-click="ctrl.remove(category)" title="{{ 'complaint.category.label.delete' | translate }}">
+												<span class="fa fa-trash"></span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="box-footer">
+						<div class="row">
+							<div class="col-md-6">
+								<pagination total-items="ctrl.categories.meta.totalElements" ng-model="ctrl.page" items-per-page="ctrl.categories.meta.size" ng-change="ctrl.search()"></pagination>
+							</div>
+							<div class="col-md-6">
+								<div class="pagination alert pull-right" translate="complaint.category.label.total_entries" translate-values="{total: ctrl.categories.meta.totalElements}"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- /.col -->
+</div>

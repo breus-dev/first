@@ -1,0 +1,87 @@
+<div class="row">
+	<div class="col-md-3">
+		<h3>
+			{{ 'admin.user.header' | translate }}
+			<br>
+			<small translate="admin.user.subheader"></small>
+		</h3>
+		<br>
+
+		<form ng-submit="ctrl.searchParams.page=1;ctrl.search();">
+			<div class="form-group">
+				<button type="button" class="btn btn-primary" ng-click="ctrl.openForm(ctrl.user)">
+					<span class="fa fa-plus"></span> {{ 'admin.user.label.add' | translate }}
+				</button>
+			</div>
+			<hr>
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="ctrl.searchParams.q" placeholder="{{ 'admin.user.label.search' | translate }}..." autofocus>
+			</div>
+			<div class="form-group">
+				<button type="submit" value="Search" class="btn btn-default">
+					<span class="fa fa-search"></span> {{ 'admin.user.label.search' | translate }}
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-9">
+		<div class="row">
+			<div class="col-md-12">
+				<br>
+				<div class="box">
+					<div class="box-header">
+					</div>
+					<div class="box-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th translate="admin.user.label.username"></th>
+										<th translate="admin.user.label.fullname"></th>
+										<th translate="admin.user.label.email"></th>
+										<th translate="admin.user.label.roles"></th>
+										<th translate="admin.user.label.action"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="user in ctrl.users">
+										<td><a href="" ng-click="ctrl.openForm(user)"><span ng-bind="user.username"></a></span></td>
+										<td ng-bind="user.name.first + ' ' + user.name.last"></td>
+										<td ng-bind="user.email"></td>
+										<td>
+											<a class="btn btn-xs btn-default" ng-click="ctrl.addRole(user)">
+												<i class="glyphicon glyphicon-pencil" ng-show="user.roles.length > 0"></i>
+												<i class="glyphicon glyphicon-plus" ng-show="user.roles.length < 1"></i>
+											</a>
+											<span ng-repeat="r in user.roles">
+												<span class="label label-default" ng-bind="r.name"></span>&nbsp;
+											</span>
+										</td>
+										<td>
+											<a href="" class="btn btn-default btn-xs" ng-click="ctrl.changePasswd(user)" title="{{ 'admin.user.label.change_passwd' | translate }}">
+												<span class="fa fa-key"></span>
+											</a>
+											<a href="" class="btn btn-danger btn-xs" ng-click="ctrl.remove(user)" title="{{ 'admin.user.label.delete' | translate:'{ username: user.username }' }}">
+												<span class="fa fa-trash"></span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="box-footer">
+						<div class="row">
+							<div class="col-md-6">
+								<pagination total-items="ctrl.users.meta.totalElements" ng-model="ctrl.page" items-per-page="ctrl.users.meta.size" ng-change="ctrl.search()"></pagination>
+							</div>
+							<div class="col-md-6">
+								<div class="pagination alert pull-right" translate="admin.user.label.total_entries" translate-values="{total: ctrl.users.meta.totalElements}"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- /.col -->
+</div>

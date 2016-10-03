@@ -1,0 +1,91 @@
+<div class="modal-header">
+	<h3 class="modal-title" translate="admin.application.label.add"></h3>
+</div>
+<form name="applicationForm" ng-submit="ctrl.submit(application, applicationForm)" novalidate validation-schema schema="application" ng-init="application = ctrl.application" ng-show="!ctrl.changeSecret">
+	<div class="modal-body">
+		<fieldset>
+			<div class="form-group" ng-show="application.id">
+				<label class="control-label" for="name" translate="admin.application.label.app_id"></label>
+				<div class="controls">
+					<input id="name" type="text" class="form-control" ng-model="application.id" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="name" translate="admin.application.label.name"></label>
+				<div class="controls">
+					<input id="name" name="name" type="text" class="form-control" ng-model="application.displayName" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="website" translate="admin.application.label.website"></label>
+				<div class="controls">
+					<input id="website" name="website" type="text" class="form-control" ng-model="application.site">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="controls">
+					<div class="checkbox">
+						<label for="autoapprove">
+							<input type="checkbox" id="autoapprove" ng-model="application.autoApprove">
+							{{ 'admin.application.label.auto_approve' | translate }}
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="redirect-uri" translate="admin.application.label.redirect_uri"></label>
+				<div class="controls">
+					<input id="redirect-uri" name="redirect" type="text" class="form-control" ng-model="application.redirectUri" required>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary col-md-3 col-xs-12">
+			<i class="fa fa-save"></i> {{ 'admin.application.label.save' | translate }}
+		</button>
+		<span class="label label-danger" ng-show="ctrl.error" translate="admin.application.label.save_error"></span>
+	</div>
+</form>
+<div class="modal-body" ng-show="ctrl.changeSecret" ng-init="application = ctrl.application">
+	<fieldset>
+		<div class="form-group">
+			<label class="control-label" for="name" translate="admin.application.label.app_name"></label>
+			<div class="controls">
+				<input id="name" type="text" class="form-control" ng-model="application.displayName" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="name" translate="admin.application.label.app_id"></label>
+			<div class="controls">
+				<input id="name" type="text" class="form-control" ng-model="application.id" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="redirect-uri" translate="admin.application.label.secret"></label>
+			<div class="controls">
+				<input id="redirect-uri" type="text" class="form-control" ng-model="application.secret" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="name" translate="admin.application.label.website"></label>
+			<div class="controls">
+				<input id="name" type="text" class="form-control" ng-model="application.site" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="name" translate="admin.application.label.redirect_uri"></label>
+			<div class="controls">
+				<input id="name" type="text" class="form-control" ng-model="application.redirectUri" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="controls">
+				<button class="btn btn-danger col-md-5 col-xs-12" ng-click="ctrl.generateSecret(application)">
+					<i class="fa fa-key"></i>
+					{{ translate="admin.application.label.generate_secret" | translate }}
+				</button>
+			</div>
+		</div>
+	</fieldset>
+</div>

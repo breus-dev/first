@@ -1,0 +1,53 @@
+<h3>
+	{{ 'profile.basic.header' | translate }}
+	<br>
+	<small translate="profile.basic.subheader"></small>
+</h3>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="box">
+			<div class="box-body">
+				<form name="userForm" ng-submit="ctrl.submit(ctrl.user, userForm)" novalidate validation-schema schema="user">
+					<fieldset>
+						<div class="form-group">
+							<label class="control-label" for="username" translate="profile.basic.label.username"></label>
+							<div class="controls">
+								<input type="text" id="username" name="username" class="form-control" ng-model="ctrl.user.username" exclude="{{ ctrl.username }}" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label" for="first-name" translate="profile.basic.label.firstname"></label>
+									<div class="controls">
+										<input type="text" id="first-name" name="firstname" class="form-control" ng-model="ctrl.user.name.first" required>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label" for="last-name" translate="profile.basic.label.lastname"></label>
+									<div class="controls">
+										<input type="text" id="last-name" name="lastname" class="form-control" ng-model="ctrl.user.name.last">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="email" translate="profile.basic.label.email"></label>
+							<div class="  controls">
+								<input type="email" id="email" name="email" class="form-control" ng-model="ctrl.user.email" exclude="{{ ctrl.email }}" required>
+							</div>
+						</div>
+						<hr>
+						<button type="submit" class="btn btn-primary col-md-3 col-xs-12">
+							<i class="fa fa-pencil"></i> {{ 'profile.basic.label.update' | translate }}
+						</button>
+						<span class="label label-danger" ng-show="ctrl.error" translate="profile.basic.label.update_error"></span>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

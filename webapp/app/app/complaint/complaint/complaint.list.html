@@ -1,0 +1,119 @@
+
+		
+	<div class="box">
+		<div class="box-header">
+			<div class="box-header">
+
+				<h3>
+					{{ 'complaint.complaint.header' | translate }}
+					<br>
+					<small translate="complaint.complaint.subheader"></small>
+				</h3>
+				<br>
+
+				<div class="col-md-9">
+					<div class="form-group">
+						<button type="button" class="btn btn-primary" ng-click="ctrl.openForm(ctrl.complaint)">
+							<span class="fa fa-plus"></span> {{ 'complaint.complaint.label.add' | translate }}
+						</button>
+					</div>
+				</div>
+	
+				<div class="col-md-3">
+					<form ng-submit="ctrl.searchParams.page=1;ctrl.search();">
+							<div class="form-group">
+							<input type="text" class="form-control" ng-model="ctrl.searchParams.q" placeholder="{{ 'complaint.category.label.search' | translate }}..." autofocus>
+						</div>
+						<div class="form-group">
+							<button type="submit" value="Search" class="btn btn-default">
+								<span class="fa fa-search"></span> {{ 'complaint.category.label.search' | translate }}
+							</button>
+						</div>
+					</form>
+				</div>	
+			</div>	
+		</div>
+	</div>
+
+
+	<div class="box">
+		<div class="box-header">
+			<div class="box-body">
+
+							
+				<h4><STRONG>List Comment</STRONG></h4><hr>
+
+				<table>
+
+						<tr>
+						 	<th>Complaint</th>
+						 	<th>Category</th>
+						 	<th>Author</th>
+						 	<th>Status</th>
+						 	<th>Action</th>
+						</tr>
+
+					<tbody ng-repeat="complaint in ctrl.complaints">
+						<tr>
+							<!-- Add Comment -->
+							<td>
+								<STRONG>
+									<a href="" ng-click="ctrl.openFormComment(complaint)">
+									<span ng-bind="complaint.title"></span>
+									
+								</a>
+								</STRONG>
+								<h5>{{complaint.logInformation.createDate |  date:"MM-dd-yyyy HH:mm"}}</h5>
+							</td>
+					
+						</tr><br>
+
+						<tr>
+							<!--  -->
+
+							<td ng-bind="complaint.message"></td>
+							<td ng-bind="complaint.category.name"></td>
+
+							<!-- Comment List -->
+							<td>
+								<a href="" ng-click="ctrl.openFormComment(comment)">
+									<span ng-bind="complaint.author.name.first + ' ' + complaint.author.name.last"></span>
+								</a>
+							</td>
+							<td>
+								<span class="label" ng-class="{'label-success' : complaint.status === 'PUBLIC', 'label-default' : complaint.status === 'PRIVATE'}" ng-bind="complaint.status">
+								</span>
+								<a href="" class="btn btn-default btn-xs" ng-click="ctrl.updateStatus(complaint, 'PUBLIC')" ng-show="complaint.status === 'PRIVATE'" title="PUBLIC">
+									<span class="fa fa-send"></span>
+								</a>
+								<a href="" class="btn btn-default btn-xs" ng-click="ctrl.updateStatus(complaint, 'PRIVATE')" ng-show="complaint.status === 'PUBLIC'" title="PRIVATE">
+									<span class="fa fa-history"></span>
+								</a>
+							</td>
+
+
+							<td>
+								<a href="" class="btn btn-danger btn-xs" ng-click="ctrl.remove(complaint)" title="{{ 'complaint.complaint.label.delete' | translate }}">
+									<span class="fa fa-trash"></span>
+								</a>
+								<a href="" class="btn btn-warning btn-xs" ng-click="ctrl.openForm(complaint)" title="{{ 'complaint.complaint.label.update' | translate }}">
+									<span class="fa fa-pencil"></span>
+								</a>
+							</td>
+						</tr><br>
+						<tr ng-repeat="comment in complaint.comments">
+							<td colspan="1" padding="10px" align="center">
+								<strong ng-bind="comment.author.name.first + ' ' + comment.author.name.last"></strong>
+							</td>
+							<td colspan="1" padding="10px">
+								{{comment.logInformation.createDate |  date:"MM-dd-yyyy HH:mm"}}
+							</td>
+							<td colspan="2" ng-bind="comment.comment"></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div><!-- box-body -->
+		</div><!-- /.col -->
+	</div>
+

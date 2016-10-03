@@ -1,0 +1,86 @@
+
+	<div class="col-md-12">
+		
+
+	<div class="box">
+		<div class="box-header">
+			<div class="box-body">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-md-10">
+							<div class="box-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+		
+									 	<th>Title</th>
+									 	<th>Complaint</th>
+									 	<th>Category</th>
+									 	<th>Author</th>
+									 	<th>Status</th>
+									 	<th>Action</th>
+									 	
+									</tr>
+
+									<tr>
+										<hr>
+										<td><a href="" class="btn btn-default">Komentar</a></td>
+									</tr>
+									<tr>
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="complaint in ctrl.complaints">
+
+										<!-- Add Comment -->
+										<td>
+											<a href="" ng-click="ctrl.openFormComment(complaint)">
+												<span ng-bind="complaint.title"></span>
+											</a>
+										</td>
+										<!--  -->
+
+										<td ng-bind="complaint.message"></td>
+										<td ng-bind="complaint.category.name"></td>
+
+										<!-- Comment List -->
+										<td>
+											<a href="" ng-click="ctrl.openFormComment(comment)">
+												<span ng-bind="comment.author.name.first + ' ' + comment.author.name.last"></span>
+											</a>
+										</td>
+										<td>
+											<span class="label" ng-class="{'label-success' : complaint.status === 'PUBLIC', 'label-default' : complaint.status === 'PRIVATE'}" ng-bind="complaint.status">
+											</span>
+											<a href="" class="btn btn-default btn-xs" ng-click="ctrl.updateStatus(complaint, 'PUBLIC')" ng-show="complaint.status === 'PRIVATE'" title="PUBLIC">
+												<span class="fa fa-send"></span>
+											</a>
+											
+										</td>
+
+
+										<td>
+											<a href="" class="btn btn-default btn-xs" ng-click="ctrl.updateStatus(complaint, 'PRIVATE')" ng-show="complaint.status === 'PUBLIC'" title="PRIVATE">
+												<span class="fa fa-history"></span>
+											</a>
+											<a href="" class="btn btn-danger btn-xs" ng-click="ctrl.remove(complaint)" title="{{ 'complaint.complaint.label.delete' | translate }}">
+												<span class="fa fa-trash"></span>
+											</a>
+											<a href="" class="btn btn-warning btn-xs" ng-click="ctrl.openForm(complaint)" title="{{ 'complaint.complaint.label.update' | translate }}">
+												<span class="fa fa-pencil"></span>
+											</a>
+										</td>
+
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- /.col -->

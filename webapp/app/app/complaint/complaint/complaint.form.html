@@ -1,0 +1,44 @@
+<div class="modal-header">
+	<h3 class="modal-title" translate="complaint.complaint.label.add"></h3>
+</div>
+<form name="complaintForm" ng-submit="ctrl.submit(complaint, complaintForm)" novalidate validation-schema schema="complaint" ng-init="complaint = ctrl.complaint">
+	<div class="modal-body">
+		<fieldset>
+			<div class="form-group">
+				<label class="control-label" for="name" translate="complaint.complaint.label.name"></label>
+				<div class="controls">
+					<input type="text" id="name" name="name" class="form-control" ng-model="complaint.title" required>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label" for="description" translate="complaint.complaint.label.description"></label>
+				<div class="controls">
+					<textarea rows="2" id="description" name="description" class="form-control" ng-model="complaint.message"></textarea>
+				</div>
+				<br>
+				<div class="form-group">
+					<label class="control-label" for="category" translate="complaint.complaint.label.category"></label>
+					<div class="controls">
+						<ui-select ng-model="complaint.category" id="category">
+							<ui-select-match placeholder="Select Category">
+								{{ $select.selected.name }}
+							</ui-select-match>
+						<ui-select-choices repeat="category in ctrl.categories" refresh="ctrl.loadCategories($select.search)">
+						<div ng-bind-html="category.name | highlight:$select.search">
+						</div>
+						</ui-select-choices>​</ui-select>
+					</div>
+				</div>
+			</div>
+
+			
+		</fieldset>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary col-md-3 col-xs-12">
+			<i class="fa fa-save"></i> {{ 'complaint.complaint.label.save' | translate }}
+		</button>
+		<span class="label label-danger" ng-show="ctrl.error" translate="complaint.complaint.label.save_error"></span>
+	</div>
+</form>

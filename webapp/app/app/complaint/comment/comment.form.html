@@ -1,0 +1,34 @@
+<div class="modal-header">
+	<h3 class="modal-title" translate="complaint.comment.label.add"></h3>
+</div>
+<form name="commentForm" ng-submit="ctrl.submit(comment, commentForm)" novalidate validation-schema schema="comment" ng-init="comment = ctrl.comment; complaint = ctrl.complaint">
+	<div class="modal-body">
+		<fieldset>
+			<div class="form-group">
+				<label class="control-label" for="name" translate="complaint.comment.label.name"></label>
+				<div class="controls">
+					<input type="text" id="name" name="name" class="form-control" ng-model="complaint.title" readonly="readonly">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="name" translate="complaint.comment.label.title"></label>
+				<div class="controls">
+					<input type="text" id="title" name="title" class="form-control" ng-model="comment.title" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="comment" translate="complaint.comment.label.comment"></label>
+				<div class="controls">
+					<textarea rows="2" id="comment" name="comment" class="form-control" ng-model="comment.comment"></textarea>
+				</div>
+			</div>
+			
+		</fieldset>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary col-md-3 col-xs-12">
+			<i class="fa fa-save"></i> {{ 'complaint.comment.label.save' | translate }}
+		</button>
+		<span class="label label-danger" ng-show="ctrl.error" translate="complaint.comment.label.save_error"></span>
+	</div>
+</form>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+	
+	<property name="now" value="now()" dbms="mysql,h2"/>
+	<property name="now" value="current_timestamp" dbms="postgresql"/>
+	
+	<changeSet id="0003" author="yama">
+		
+		<createTable tableName="yama_category">
+			<column name="id" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="create_by" type="varchar(50)"/>
+			<column name="create_date" type="datetime"/>
+			<column name="update_by" type="varchar(50)"/>
+			<column name="update_date" type="datetime"/>
+			<column name="active_flag" type="int(10)"/>
+
+			<column name="name" type="varchar(50)">
+				<constraints unique="true" nullable="false"/>
+			</column>
+			<column name="description" type="varchar(200)"/>
+		</createTable> 
+
+		<createTable tableName="yama_complaint">
+			<column name="id" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="create_by" type="varchar(50)"/>
+			<column name="create_date" type="datetime"/>
+			<column name="update_by" type="varchar(50)"/>
+			<column name="update_date" type="datetime"/>
+			<column name="active_flag" type="int(10)"/>
+
+			<column name="title" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="message" type="varchar(250)"/>
+			<column name="category_id" type="varchar(50)"/>
+			<column name="status" type="varchar(50)"/>
+			<column name="author_id" type="varchar(50)" />
+			
+		</createTable>
+		
+		<createTable tableName="yama_comment">
+			<column name="id" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="create_by" type="varchar(50)"/>
+			<column name="create_date" type="datetime"/>
+			<column name="update_by" type="varchar(50)"/>
+			<column name="update_date" type="datetime"/>
+			<column name="active_flag" type="int(10)"/>
+
+			<column name="title" type="varchar(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="comment" type="varchar(250)"/>
+			<column name="complaint_id" type="varchar(50)"/>
+			<column name="author_id" type="varchar(50)" />
+			
+		</createTable>
+		
+		
+		<!-- <addForeignKeyConstraint constraintName="fk_complaint_category_id"
+		 referencedTableName="yama_category"
+		  baseColumnNames="category_id"
+		   baseTableName="yama_complaint" 
+		   referencedColumnNames="id"/> -->
+		   
+		   <addForeignKeyConstraint constraintName="fk_yama_complaint_author_id" 
+		   referencedTableName="yama_backend_user" 
+		   baseColumnNames="author_id" 
+		   baseTableName="yama_complaint" 
+		   referencedColumnNames="id"/>
+		   
+		   <addForeignKeyConstraint constraintName="fk_yama_complaint_category_id" 
+		   referencedTableName="yama_category" 
+		   baseColumnNames="category_id" 
+		   baseTableName="yama_complaint" 
+		   referencedColumnNames="id"/>
+		   
+		   <addForeignKeyConstraint constraintName="fk_yama_complaint_complaint_id" 
+		   referencedTableName="yama_complaint" 
+		   baseColumnNames="complaint_id" 
+		   baseTableName="yama_comment" 
+		   referencedColumnNames="id"/>
+	</changeSet>
+</databaseChangeLog>
